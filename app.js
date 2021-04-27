@@ -6,7 +6,7 @@ var cors = require('cors');
 const { response } = require('express');
 
 app.use(cors({ origin: '*' , credentials :  true}));
-app.use(express.json())
+app.use(bodyParser.json())
 
 
 app.get('/', (req, res) => {
@@ -51,6 +51,7 @@ app.post('/createComanda',async (req,res)=>{
 })
 
 app.post('/createLineaComanda',async (req,res)=>{
+    console.log("Createline",req.body)
     let result = await db.CreateLienaComanda(req.body)
     res.send(result)
 })
