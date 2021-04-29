@@ -10,7 +10,7 @@ async function getBebidasMenu() {
 
 async function getRefrescos() {
     
-    const res = await execQuery("SELECT Id,Nombre,[Type],Precio,Img FROM [dbo].[Bebidas] WHERE Stock = 1 and [Type] = 'Alcohol-Destilado'")
+    const res = await execQuery("SELECT Id,Nombre,[Type],Precio,Img FROM [dbo].[Bebidas] WHERE Stock = 1 and [Type] = 'Refresco'")
 
     return res
 }
