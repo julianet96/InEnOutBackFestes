@@ -27,6 +27,26 @@ const routes = [
             res.send(await comandaFunctions.createComanda(req.body))
         }
     },
+    {
+        method: 'get',
+        url: '/getLineasComanda',
+        fn: async function(req, res, next) {
+
+            const idComanda = req.query.idComanda
+
+            console.log( req.query)
+
+            res.send(await comandaFunctions.getLineasComanda(idComanda))
+        }
+    },
+    {
+        method: 'post',
+        url: '/deleteLineaComanda',
+        fn: async function(req, res, next) {
+
+            res.send(await comandaFunctions.deleteLineaComanda(req.body))
+        }
+    },
 ]
 
 module.exports = routes

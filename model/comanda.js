@@ -19,7 +19,7 @@ async function getComandaRellenando(mesa) {
 
 async function createLineaComanda(lineaComanda) {
 
-    const res = await execQuery("INSERT INTO [dbo].[Linea_Comanda] ([Id_Comanda],[Id_Comida],[Id_Bebida],[Comentario],[Cantidad]) OUTPUT INSERTED.Id VALUES ("+ lineaComanda.idComanda +","+ lineaComanda.idComida +","+ lineaComanda.idBebida +",'"+ lineaComanda.Comentario +"',"+ lineaComanda.cantidad +")")
+    const res = await execQuery("INSERT INTO [dbo].[Linea_Comanda] ([Id_Comanda],[Id_Comida],[Id_Bebida],[Comentario],[Cantidad],[TotalLinea]) OUTPUT INSERTED.Id VALUES ("+ lineaComanda.idComanda +","+ lineaComanda.idComida +","+ lineaComanda.idBebida +",'"+ lineaComanda.Comentario +"',"+ lineaComanda.cantidad +","+ lineaComanda.totalLinea +")")
 
     return res
 }
@@ -31,8 +31,53 @@ async function createComanda(comanda) {
     return res
 }
 
+async function getLineasComanda (idComanda) {
+
+    const res = await execQuery("SELECT lc.Id,lc.Cantidad,lc.Comentario,lc.TotalLinea,bb.Nombre AS NombreBebida, cm.Nombre AS NombreComida, bb.Img AS bebidaImg, cm.Img AS comidaImg FROM Linea_Comanda AS lc left join Bebidas AS bb ON bb.Id = lc.Id_Bebida left join Comida AS cm ON cm.Id = lc.Id_Comida WHERE lc.Id_Comanda = "+idComanda)
+
+    let arrayResult = []
+
+    res.recordset.forEach(element => {
+        let nombre = element.NombreBebida
+        let img = element.bebidaImg
+        let coment = element.Comentario
+        if(nombre == null){
+            nombre = element.NombreComida
+            img = element.comidaImg
+        }
+
+        if(coment == 'null'){
+            coment = ""
+        }
+
+        arrayResult.push(
+            {
+                Id: element.Id,
+                Cantidad: element.Cantidad,
+                TotalLinea: element.TotalLinea,
+                Nombre: nombre,
+                Img: img,
+                Comentario: coment
+            }
+        )
+    });
+
+    console.log(arrayResult)
+
+    return arrayResult
+}
+
+async function deleteLineaComanda (idLineaComanda) {
+    
+    const res = await execQuery("DELETE FROM [dbo].[Linea_Comanda] WHERE Id = "+idLineaComanda.idLineaComanda)
+
+    return res
+}
+
 module.exports = {
     getComandaRellenando,
     createLineaComanda,
     createComanda,
+    getLineasComanda,
+    deleteLineaComanda,
 }
