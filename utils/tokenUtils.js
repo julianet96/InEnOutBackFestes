@@ -6,11 +6,11 @@ function getToken(payload) {
     return jwt.sign(payload, secret, { expiresIn: '1d' })
 }
 
-function verifyToken(token) {
+async function verifyToken(token) {
 
     try {
 
-        return jwt.verify(token, secret)
+        return await jwt.verify(token, secret)
 
     } catch (err) {
         

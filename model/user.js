@@ -32,7 +32,15 @@ async function createUser(name, username, password, type) {
     return result
 }
 
+async function getUsers(){
+
+    const result = await execQuery("SELECT Id, Nombre, UserName, Type FROM Users")
+
+    return result;
+}
+
 module.exports = {
     loginUser,
     createUser,
+    getUsers,
 }

@@ -17,6 +17,23 @@ const routes = [
             else res.send({ token: tokenUser })
         }
     },
+    {
+        method: 'post',
+        url: '/addUser',
+        fn: async function(req,res, next){
+            console.log(req.body)
+        }
+    },
+    {
+        method: 'get',
+        url: '/getUsers',
+        fn: async function(req,res, next){
+            
+            const result = await userFunctions.getUsers();
+            
+            res.send(result)
+        }
+    },
 ]
 
 module.exports = routes
