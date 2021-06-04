@@ -47,6 +47,14 @@ const routes = [
             res.send(await comandaFunctions.deleteLineaComanda(req.body))
         }
     },
+    {
+        method: 'post',
+        url: '/UpdateComanda',
+        fn: async function(req, res, next) {
+
+            res.send(await comandaFunctions.updateComanda(req.body))
+        }
+    }
 ]
 
 module.exports = routes

@@ -8,4 +8,9 @@ app.use(cors({ origin: '*', credentials :  true }));
 app.use(bodyParser.json())
 app.use(routes)
 
-module.exports = app
+const http = require('http').createServer(app);
+
+const socket = require("./utils/socket");
+socket(http)
+
+module.exports = http

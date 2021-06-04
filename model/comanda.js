@@ -31,11 +31,23 @@ async function createComanda(comanda) {
     return res
 }
 
+async function updateComanda(comanda) {
+
+    const res = await execQuery("UPDATE [dbo].[Comanda] SET [Total] = " + comanda.Total + ",[Estado] = " + comanda.Estado + " WHERE [Id] = "+ comanda.Id)
+
+    return res
+}
+
 async function getLineasComanda (idComanda) {
 
     const res = await execQuery("SELECT lc.Id,lc.Cantidad,lc.Comentario,lc.TotalLinea,bb.Nombre AS NombreBebida, cm.Nombre AS NombreComida, bb.Img AS bebidaImg, cm.Img AS comidaImg FROM Linea_Comanda AS lc left join Bebidas AS bb ON bb.Id = lc.Id_Bebida left join Comida AS cm ON cm.Id = lc.Id_Comida WHERE lc.Id_Comanda = "+idComanda)
 
     let arrayResult = []
+
+    if(res == undefined)
+    {
+        return arrayResult;
+    }
 
     res.recordset.forEach(element => {
         let nombre = element.NombreBebida
@@ -80,4 +92,5 @@ module.exports = {
     createComanda,
     getLineasComanda,
     deleteLineaComanda,
+    updateComanda,
 }
