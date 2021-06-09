@@ -63,6 +63,14 @@ const routes = [
             res.send(await comandaFunctions.getComandaPendientePago())
         }
     },
+    {
+        method: 'post',
+        url: '/changeStatusComanda',
+        fn: async function(req, res, next) {
+
+            res.send(await comandaFunctions.changeStatusComanda(req.body))
+        }
+    },
 ]
 
 module.exports = routes

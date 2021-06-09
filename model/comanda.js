@@ -93,6 +93,13 @@ async function getComandaPendientePago() {
     return res
 }
 
+async function changeStatusComanda(comanda) {
+    
+    const res = await execQuery("UPDATE [dbo].[Comanda] SET [Estado] = " + comanda.Estado + " WHERE [Id] = "+ comanda.Id)
+    
+    return res
+}
+
 module.exports = {
     getComandaRellenando,
     createLineaComanda,
@@ -101,4 +108,5 @@ module.exports = {
     deleteLineaComanda,
     updateComanda,
     getComandaPendientePago,
+    changeStatusComanda,
 }
