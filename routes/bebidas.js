@@ -30,7 +30,15 @@ const routes = [
         url: '/getTodasBebidas',
         fn: async function (req, res, next) {
 
-            res.send(await bebidasFunctions.GetBebidasAlcoholDestilado())
+            res.send(await bebidasFunctions.getAllBebida())
+        }
+    },
+    {
+        method: 'post',
+        url: '/UpdateStockBebida',
+        fn: async function(req, res, next) {
+
+            res.send(await bebidasFunctions.updateStock(req.body))
         }
     }
 ]

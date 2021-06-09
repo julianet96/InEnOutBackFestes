@@ -22,8 +22,24 @@ async function getAlcoholDestilado() {
     return res
 }
 
+async function getAllBebida() {
+    
+    const res = await execQuery("SELECT Id ,Nombre ,[Type] ,Precio ,Stock FROM [dbo].[Bebidas]")
+
+    return res
+}
+
+async function updateStock(bebida){
+
+    const res = await execQuery("UPDATE [dbo].[Bebidas] SET Stock = " + bebida.Stock + " WHERE Id = " + bebida.Id)
+
+    return res
+}
+
 module.exports = {
     getBebidasMenu,
     getRefrescos,
-    getAlcoholDestilado
+    getAlcoholDestilado,
+    updateStock,
+    getAllBebida,
 }
