@@ -54,7 +54,15 @@ const routes = [
 
             res.send(await comandaFunctions.updateComanda(req.body))
         }
-    }
+    },
+    {
+        method: 'get',
+        url: '/getComandaPendientePago',
+        fn: async function(req, res, next) {
+
+            res.send(await comandaFunctions.getComandaPendientePago())
+        }
+    },
 ]
 
 module.exports = routes

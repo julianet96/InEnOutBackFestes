@@ -86,6 +86,13 @@ async function deleteLineaComanda (idLineaComanda) {
     return res
 }
 
+async function getComandaPendientePago() {
+    
+    const res = await execQuery("SELECT Id, Mesa, Total, Hora FROM Comanda WHERE Estado = 1")
+
+    return res
+}
+
 module.exports = {
     getComandaRellenando,
     createLineaComanda,
@@ -93,4 +100,5 @@ module.exports = {
     getLineasComanda,
     deleteLineaComanda,
     updateComanda,
+    getComandaPendientePago,
 }
