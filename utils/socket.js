@@ -8,6 +8,10 @@ module.exports = (http) => {
             io.emit('pedidoChiringo', msg);
         });
 
+        socket.on('cambioEstadoCoBa', (msg) =>{
+            io.emit('pedidoBarChir',msg);
+        });
+
         socket.on('disconnect', () => {
             console.log('User disconnected.');
         });
