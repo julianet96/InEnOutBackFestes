@@ -21,7 +21,38 @@ const routes = [
         method: 'post',
         url: '/addUser',
         fn: async function(req,res, next){
-            console.log(req.body)
+            const body = req.body;
+            
+            const result = await userFunctions.createUser(body.name,body.username,body.password,body.type)
+
+            res.send(result)
+        }
+    },
+    {
+        method: 'post',
+        url: '/updateUser',
+        fn: async function(req,res, next){
+            const body = req.body;
+            
+            const result = await userFunctions.updateUser(body.name,body.username,body.type,body.password,body.id)
+
+            res.send(result)
+        }
+    },
+    {
+        method: 'post',
+        url: '/deleteUser',
+        fn: async function(req,res, next){
+            const body = req.body;
+            if(body.type != 1){
+                const result = await userFunctions.deleteUser(body.id)
+
+                res.send(result)
+            }
+            else{
+                res.send('')
+            }
+
         }
     },
     {

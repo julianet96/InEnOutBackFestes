@@ -39,8 +39,33 @@ async function getUsers(){
     return result;
 }
 
+async function updateUser(name, username, type, password, id){
+    
+    const result = '';
+
+    if(password != null && password != undefined && password != ''){
+        const hashPassword = await genHash(password)
+
+        const result1 = await execQuery("UPDATE [dbo].[Users] SET [Nombre] = '" + name + "' ,[UserName] = '" + username + "' ,[Type] = " + type + " ,[Password] = '" + hashPassword + "' WHERE Id = "+id)
+    }
+    else{
+        const result2 = await execQuery("UPDATE [dbo].[Users] SET [Nombre] = '" + name + "' ,[UserName] = '" + username + "' ,[Type] = " + type + " WHERE Id = "+id)
+    }
+
+    return result
+}
+
+async function deleteUser(id){
+
+    const result = await execQuery("DELETE FROM [dbo].[Users] WHERE Id = "+id)
+
+    return result
+}
+
 module.exports = {
     loginUser,
     createUser,
     getUsers,
+    updateUser,
+    deleteUser,
 }
