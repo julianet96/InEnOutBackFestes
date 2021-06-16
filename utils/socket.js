@@ -1,6 +1,8 @@
 module.exports = (http) => {
     const io = require('socket.io')(http);
 
+    io.setMaxListeners(0);
+
     io.on('connection', (socket) => {
         console.log('User connected.');
 
@@ -9,7 +11,7 @@ module.exports = (http) => {
         });
 
         socket.on('cambioEstadoCoBa', (msg) =>{
-            io.emit('pedidoBarChir',msg);
+            io.emit('pedidoBarCocina',msg);
         });
 
         socket.on('disconnect', () => {
