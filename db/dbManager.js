@@ -1,10 +1,10 @@
 const mssql = require('mssql')
 // Configuracion de la base de datos / conexion
 const dbConfig = {
-    user: process.env.dbUser || 'masteruser',
-    password: process.env.dbPass || 'Parcou11.',
-    server: process.env.dbServer || 'juliatest.database.windows.net',
-    database: process.env.db || 'JuliaTest',
+    user: process.env.dbUser || '******',
+    password: process.env.dbPass || '******',
+    server: process.env.dbServer || 'j****.database.windows.net',
+    database: process.env.db || '******',
     requestTimeout: process.env.dbTimeout || 60000,
 }
 const sql = new mssql.ConnectionPool(dbConfig).connect()
